@@ -27,7 +27,7 @@ rock = "/Users/suzukisohei/Music/downloads/rock"
 jazz = "/Users/suzukisohei/Music/downloads/jazz"
 
 
-def main(Argc,Argv):
+def main(Argc, Argv):
     play = path
     if Options.rock:
         play = rock
@@ -40,6 +40,7 @@ def main(Argc,Argv):
     for i in range(Options.loop):
         command = command + " %s" % play
     os.system(command)
+
 
 if __name__ == "__main__":
     main(Argc, Argv)
