@@ -12,7 +12,7 @@ parser = OptionParser()
 parser.add_option("-a", "--add", dest="add",
                   action="store_true", default=False,
                   help="add FILES to histogram")
-parser.add_option("-u","--using", dest="column",
+parser.add_option("-u", "--using", dest="column",
                   type="int", default=0,
                   help="use column line")
 parser.add_option("-t", "--type", dest="type",
@@ -69,7 +69,9 @@ def CanvasSet():
     if bool(flag) is False:
         fig.canvas.manager.window.attributes('-topmost', 1)
 
+
 data = []
+
 
 def LoadData(FileNum, FileName):
     Flag = False
@@ -78,10 +80,10 @@ def LoadData(FileNum, FileName):
             Flag = True
         root, ext = os.path.splitext(FileName[i])
         if ext == ".txt":
-            LoadTxt(Flag,FileName[i])
+            LoadTxt(Flag, FileName[i])
 
         elif ext == ".csv":
-            LoadCsv(Flag,FileName[i])
+            LoadCsv(Flag, FileName[i])
 
         else:
             print(" error: invalid extension. —— %s" % FileName[i])
@@ -91,17 +93,19 @@ def LoadData(FileNum, FileName):
 def LoadTxt(Flag, FileName):
     global data
     try:
-        data = np.loadtxt(FileName, comments="//", usecols=(Options.column), ndmin=1)
+        data = np.loadtxt(FileName, comments="//",
+                          usecols=(Options.column), ndmin=1)
     # except ValueError:
-    #     data = np.loadtxt(FileName, comments="#", usecols=(Options.column), ndmin=1)
+    #     data = np.loadtxt(FileName, comments="#",
+    #                       usecols=(Options.column), ndmin=1)
     except ValueError as e:
-        print(" error: invalid file format. —— %s   " % FileName,e)
+        print(" error: invalid file format. —— %s   " % FileName, e)
         quit()
 
-    if Options.xmin == None or Options.xmax == None:
+    if Options.xmin is None or Options.xmax is None:
         rangeoption = None
     else:
-        rangeoption = (Options.xmin,Options.xmax)
+        rangeoption = (Options.xmin, Options.xmax)
 
     if Options.add is False:
         plt.hist(data,
@@ -123,17 +127,19 @@ def LoadTxt(Flag, FileName):
 def LoadCsv(Flag, FileName):
     global data
     try:
-        data = np.loadtxt(FileName, comments="//", delimiter=",", usecols=(Options.column), ndmin=1)
+        data = np.loadtxt(FileName, comments="//", delimiter=",",
+                          usecols=(Options.column), ndmin=1)
     # except ValueError:
-    #     data = np.loadtxt(FileName, comments="#", delimiter=",", usecols=(Options.column), ndmin=1)
+    #     data = np.loadtxt(FileName, comments="#", delimiter=",",
+    #                       usecols=(Options.column), ndmin=1)
     except ValueError as e:
-        print(" error: invalid format. —— %s   " % FileName,e)
+        print(" error: invalid format. —— %s   " % FileName, e)
         quit()
 
-    if Options.xmin == None or Options.xmax == None:
+    if Options.xmin is None or Options.xmax is None:
         rangeoption = None
     else:
-        rangeoption = (Options.xmin,Options.xmax)
+        rangeoption = (Options.xmin, Options.xmax)
 
     if Options.add is False:
         plt.hist(data,
@@ -150,7 +156,6 @@ def LoadCsv(Flag, FileName):
                  range=rangeoption,
                  bins=Options.bins,
                  label=FileName)
-
 
 
 def ShowGraph(FileNum):

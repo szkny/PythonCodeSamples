@@ -96,7 +96,7 @@ def CheckData(FileName):
     except OSError:
         print(" error: file not found.  —— %s" % FileName[0])
         quit()
-    except:
+    except ():
         print(" error: something wrong.")
         quit()
 
@@ -168,8 +168,8 @@ def LoadTxt(FileName, column, linecolor, DotFlag):
     #     data = np.loadtxt(FileName, comments="*", usecols=(0, column))
     except (ValueError, IndexError) as e:
         print(" error: invalid file format. —— %s   " % FileName, e)
-        print("        if you want to comment out,\
-              you can use '//', '#' or '*' in the text file.")
+        print("        if you want to comment out, ",
+              "you can use '//', '#' or '*' in the text file.")
         quit()
     # x_smooth = np.linspace(min(data[:, 0]), max(data[:, 0]), 100)
     # y_smooth = spline(data[:, 0], data[:, 1], x_smooth)

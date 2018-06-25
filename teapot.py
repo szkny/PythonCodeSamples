@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding:utf-8
+# coding:utf-8
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -25,6 +25,7 @@ no_shininess = [0.0]                    # 鏡面反射しない
 low_shininess = [5.0]                   # 弱い鏡面反射
 high_shininess = [100.0]                # 強い鏡面反射
 
+
 def main():
     glutInit(sys.argv)
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
@@ -39,10 +40,11 @@ def main():
     init(300, 300)
     glutMainLoop()
 
+
 def init(width, height):
     glClearColor(0.0, 0.0, 0.0, 1.0)
     glEnable(GL_DEPTH_TEST)
-    
+
     # ライティングの設定
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient)
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse)
@@ -50,10 +52,11 @@ def init(width, height):
     glLightfv(GL_LIGHT0, GL_POSITION, light_position)
     glEnable(GL_LIGHTING)  # ライティングを有効にする
     glEnable(GL_LIGHT0)    # 0番目の照明を有効にする
-    
+
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     gluPerspective(45.0, float(width)/float(height), 0.1, 100.0)
+
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -61,24 +64,25 @@ def display():
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
     gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
-    
+
     # マテリアルの設定
     glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat)
     glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse)
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular)
     glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess)
     glMaterialfv(GL_FRONT, GL_EMISSION, no_mat)
-    
+
     # 回転
     glRotatef(xrot, 1.0, 0.0, 0.0)
     glRotatef(yrot, 0.0, 1.0, 0.0)
-    
+
     glColor3f(0.0, 0.0, 1.0)
-    
+
     # Teapotの描画
     glutSolidTeapot(1.0)
-    
+
     glutSwapBuffers()
+
 
 def reshape(width, height):
     glViewport(0, 0, width, height)
@@ -86,15 +90,17 @@ def reshape(width, height):
     glLoadIdentity()
     gluPerspective(45.0, float(width)/float(height), 0.1, 100.0)
 
+
 def idle():
     global xrot, yrot
     xrot += xspeed
     yrot += yspeed
     glutPostRedisplay()
 
+
 def keyboard(key, x, y):
     global xspeed, yspeed
-    
+
     # 特殊キー
     if key == ESCAPE:
         sys.exit()
@@ -106,7 +112,7 @@ def keyboard(key, x, y):
         yspeed -= 0.1
     elif key == GLUT_KEY_RIGHT:
         yspeed += 0.1
-    
+
     # 一般キー
     if key == "l":  # 照明のオンオフ
         if glIsEnabled(GL_LIGHTING):
@@ -114,6 +120,6 @@ def keyboard(key, x, y):
         else:
             glEnable(GL_LIGHTING)
 
+
 if __name__ == "__main__":
     main()
-
