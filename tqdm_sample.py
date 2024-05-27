@@ -6,6 +6,7 @@ Created on Sun Jan 21st 15:57:35 2024
    @author: szkny
    @brief : tqdm sample code
 """
+
 from tqdm import tqdm
 import time
 
@@ -16,3 +17,4 @@ bar = tqdm(total=30)
 for i in range(bar.total):
     bar.update(1)
     time.sleep(0.1)
+bar.close()
