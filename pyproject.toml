@@ -5,6 +5,7 @@ description = ""
 authors = ["sohei.suzuki <suzuki.s1008@gmail.com>"]
 readme = "README.md"
 packages = [{include = "mymodules/**/*.py"}]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.11"
